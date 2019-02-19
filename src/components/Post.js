@@ -14,5 +14,4 @@ const Post = props => (
     </Card>
   </Card.Group>
 );
-
 export default Post;

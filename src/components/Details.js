@@ -1,30 +1,29 @@
 import React from "react";
-import { getAllPosts } from "../utils/apiTeste";
-import { Container } from "semantic-ui-react";
+import { connect } from "react-redux";
+import Comments from "./Comments";
 
 class Details extends React.Component {
-  state = {
-    post: []
-  };
-
-  componentDidMount() {
-    getAllPosts().then(res => {
-      const posts = res.data;
-      posts.filter(
-        post =>
-          post.id == this.props.match.params.id && this.setState({ post: post })
-      );
-    });
-  }
-
   render() {
-    return (
-      <div style={{ padding: "25px" }}>
-        <h1> Post: {this.state.post.title} </h1>
-        <h2> Author: {this.state.post.author} </h2>
-        <p>{this.state.post.body}</p>
-      </div>
+    return Object.values(this.props.posts).map(
+      post =>
+        post.id == this.props.match.params.id && (
+          <div style={{ padding: "25px" }} key={post.id}>
+            <h1> teste </h1>
+            <h1> Post: {post.title} </h1>
+            <h2> Author: {post.author} </h2>
+            <p>{post.body}</p>
+            <h1> Comentários : </h1>
+            <Comments postId={post.id} />
+          </div>
+        )
     );
   }
 }
-export default Details;
+
+const mapStateToProps = state => {
+  return {
+    posts: state.posts
+  };
+};
+
+export default connect(mapStateToProps)(Details);
