@@ -54,7 +54,7 @@ export const voteUpById = id => {
     return voteUpComment(id)
       .then(response => {
         dispatch(voteUpByIdSuccess(id));
-        console.log("Success");
+        console.log(response.data);
       })
       .catch(error => {
         console.log(error);
@@ -67,7 +67,6 @@ export const voteDownById = id => {
     return voteDownComment(id)
       .then(response => {
         dispatch(voteDownByIdSuccess(id));
-        console.log("Success");
       })
       .catch(error => {
         console.log(error);
