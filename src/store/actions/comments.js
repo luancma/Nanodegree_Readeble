@@ -2,17 +2,26 @@ import {
   getAllCommentsById,
   voteDownComment,
   voteUpComment,
-  createNewComment
+  createNewComment,
+  deleteComment
 } from "../../utils/apiTeste";
 export const FETCH_COMMENTS_BY_ID = "FETCH_COMMENTS_BY_ID";
 export const VOTE_COMMENT_DOWN = "VOTE_COMMENT_DOWN";
 export const VOTE_COMMENT_UP = "VOTE_COMMENT_UP";
 export const ADD_COMMENT = "ADD_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";
 
 export function fetchCommentByIdSuccess(comments) {
   return {
     type: FETCH_COMMENTS_BY_ID,
     comments
+  };
+}
+
+export function deleteCommentSuccess(comment) {
+  return {
+    type: DELETE_COMMENT,
+    comment
   };
 }
 
@@ -49,12 +58,24 @@ export const addComment = (id, timestamp, body, author, parentId) => {
   };
 };
 
+export const deleteCommentAction = id => {
+  return dispatch => {
+    return deleteComment(id)
+      .then(response => {
+        dispatch(deleteCommentSuccess(response.data));
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+};
+
 export const voteUpById = id => {
   return dispatch => {
     return voteUpComment(id)
       .then(response => {
         dispatch(voteUpByIdSuccess(id));
-        console.log(response.data);
       })
       .catch(error => {
         console.log(error);

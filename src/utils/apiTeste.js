@@ -36,7 +36,7 @@ export const getAllCommentsById = id => {
 export const voteDownComment = id => {
   return axios.post(
     `${api}/comments/${id}`,
-    { option: "voteDown" },
+    { option: "downVote" },
     { headers }
   );
 };
@@ -59,4 +59,9 @@ export const createPost = (id, timestamp, title, author, body) => {
       console.log(response);
       console.log(response.data);
     });
+};
+
+// DELETE COMMET:
+export const deleteComment = id => {
+  axios.delete(`${api}/comments/${id}`, { deleted: "true" }, { headers });
 };
