@@ -8,6 +8,7 @@ export function fetchAllPostsSuccess(posts) {
   };
 }
 
+
 export const fetchAllPosts = () => {
   return dispatch => {
     return getAllPosts()

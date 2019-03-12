@@ -10,7 +10,7 @@ export const VOTE_COMMENT_DOWN = "VOTE_COMMENT_DOWN";
 export const VOTE_COMMENT_UP = "VOTE_COMMENT_UP";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
-
+export const DELETE_COMMENT_ERROR = "DELETE_COMMENT_ERROR";
 export function fetchCommentByIdSuccess(comments) {
   return {
     type: FETCH_COMMENTS_BY_ID,
@@ -24,6 +24,15 @@ export function deleteCommentSuccess(comment) {
     comment
   };
 }
+
+export function deleteCommentError(comment) {
+  return {
+    type: DELETE_COMMENT_ERROR,
+    comment
+  };
+}
+
+
 
 export function voteDownByIdSuccess(comment) {
   return {
@@ -60,13 +69,14 @@ export const addComment = (id, timestamp, body, author, parentId) => {
 
 export const deleteCommentAction = id => {
   return dispatch => {
+    console.log(id)
     return deleteComment(id)
       .then(response => {
         dispatch(deleteCommentSuccess(response.data));
-        console.log(response.data);
+        console.log('DELETADO COM SUCESSO')
       })
       .catch(error => {
-        console.log(error);
+        console.log(error)
       });
   };
 };

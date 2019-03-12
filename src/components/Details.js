@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import Comments from "./Comments";
-import NewComment from "./NewComment";
 
 class Details extends React.Component {
   render() {
+    console.log(this.props.posts)
     return (
       <div>
         {Object.values(this.props.posts).map(

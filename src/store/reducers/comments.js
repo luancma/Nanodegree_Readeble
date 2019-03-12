@@ -3,17 +3,16 @@ import {
   VOTE_COMMENT_DOWN,
   VOTE_COMMENT_UP,
   ADD_COMMENT,
-  DELETE_COMMENT
+  DELETE_COMMENT,
+  DELETE_COMMENT_ERROR
 } from "../actions/comments";
 
 const comments = (state = [], action) => {
   switch (action.type) {
     case FETCH_COMMENTS_BY_ID:
       return {
-        ...action.comments.reduce((commentDetails, comment) => {
-          commentDetails[comment.id] = comment;
-          return commentDetails;
-        }, {})
+        ...state,
+        ...action.comments
       };
 
     case ADD_COMMENT:
@@ -21,14 +20,12 @@ const comments = (state = [], action) => {
         ...state,
         [action.comment.id]: {
           ...action.comment
-        }
+        },
       };
 
     case DELETE_COMMENT:
-      console.log(action.comment);
       return {
-        ...state,
-        ...state.filter(item => item.id !== action.comment.id)
+        ...Object.values(state).filter(item => item.id != action.comment.id)
       };
 
     case VOTE_COMMENT_DOWN:

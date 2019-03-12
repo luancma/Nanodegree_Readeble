@@ -63,5 +63,6 @@ export const createPost = (id, timestamp, title, author, body) => {
 
 // DELETE COMMET:
 export const deleteComment = id => {
-  axios.delete(`${api}/comments/${id}`, { deleted: "true" }, { headers });
+  console.log(id)
+  return axios.delete(`${api}/comments/${id}`, { headers })
 };
