@@ -1,5 +1,6 @@
-import { getAllPosts } from "../../utils/apiTeste";
+import { getAllPosts, createPost } from "../../utils/apiTeste";
 export const FETCH_POSTS = "FETCH_POSTS";
+export const ACTION_ADD_POST = "ACTION_ADD_POST";
 
 export function fetchAllPostsSuccess(posts) {
   return {
@@ -8,6 +9,32 @@ export function fetchAllPostsSuccess(posts) {
   };
 }
 
+export function addPostSuccess(post) {
+  return {
+    type: ACTION_ADD_POST,
+    post
+  };
+}
+
+export const actionAddPostSuccess = (
+  id,
+  timestamp,
+  title,
+  author,
+  textBody,
+  category
+) => {
+  return dispatch => {
+    return createPost(id, timestamp, title, author, textBody, category)
+      .then(response => {
+        dispatch(addPostSuccess(response.data));
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+};
 
 export const fetchAllPosts = () => {
   return dispatch => {

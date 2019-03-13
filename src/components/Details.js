@@ -4,7 +4,7 @@ import Comments from "./Comments";
 
 class Details extends React.Component {
   render() {
-    console.log(this.props.posts)
+    console.log(this.props.posts);
     return (
       <div>
         {Object.values(this.props.posts).map(

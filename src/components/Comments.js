@@ -28,23 +28,18 @@ class Comments extends Component {
   };
 
   render() {
-
     return (
       <div>
-        {Object.values(this.props.comments).map(comment =>
-          comment.parentId === this.props.postId && (
-            <div style={{ padding: "25px" }} key={comment.id}>
-              <button onClick={() => this.deleteComment(comment.id)}>X</button>
-              <h3> {comment.author} </h3>
-              <p> {comment.body} </p>
-              <p>{comment.voteScore}</p>
-              <button onClick={() => this.voteUpComment(comment.id)}>+</button>
-              <button onClick={() => this.voteDownComment(comment.id)}>
-                -
-              </button>
-            </div>
-          )
-        )}
+        {Object.values(this.props.comments).map(comment => (
+          <div style={{ padding: "25px" }} key={comment.id}>
+            <button onClick={() => this.deleteComment(comment.id)}>X</button>
+            <h3> {comment.author} </h3>
+            <p> {comment.body} </p>
+            <p>{comment.voteScore}</p>
+            <button onClick={() => this.voteUpComment(comment.id)}>+</button>
+            <button onClick={() => this.voteDownComment(comment.id)}>-</button>
+          </div>
+        ))}
         <div>
           <NewComment postId={this.props.postId} />
         </div>
@@ -55,7 +50,8 @@ class Comments extends Component {
 
 const mapStateToProps = state => {
   return {
-    comments: state.comments
+    comments: state.comments,
+    posts: state.posts
   };
 };
 

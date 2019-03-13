@@ -3,8 +3,7 @@ import {
   VOTE_COMMENT_DOWN,
   VOTE_COMMENT_UP,
   ADD_COMMENT,
-  DELETE_COMMENT,
-  DELETE_COMMENT_ERROR
+  DELETE_COMMENT
 } from "../actions/comments";
 
 const comments = (state = [], action) => {
@@ -17,10 +16,7 @@ const comments = (state = [], action) => {
 
     case ADD_COMMENT:
       return {
-        ...state,
-        [action.comment.id]: {
-          ...action.comment
-        },
+        ...Object.values(state).concat(action.comment)
       };
 
     case DELETE_COMMENT:
@@ -31,18 +27,16 @@ const comments = (state = [], action) => {
     case VOTE_COMMENT_DOWN:
       return {
         ...state,
-        [action.comment]: {
-          ...state[action.comment],
-          voteScore: state[action.comment].voteScore - 1
-        }
+        ...Object.values(state).map(
+          item => item.id === action.comment.id && action.comment
+        )
       };
     case VOTE_COMMENT_UP:
       return {
         ...state,
-        [action.comment]: {
-          ...state[action.comment],
-          voteScore: state[action.comment].voteScore + 1
-        }
+        ...Object.values(state).map(
+          item => item.id === action.comment.id && action.comment
+        )
       };
     default:
       return state;

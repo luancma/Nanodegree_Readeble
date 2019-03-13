@@ -1,13 +1,30 @@
 import React, { Component } from "react";
 import { Form, TextArea, FormField, Button } from "semantic-ui-react";
-import { createPost } from "../utils/apiTeste";
+import Axios from "axios";
+import { actionAddPostSuccess } from "../store/actions/posts";
+import { connect } from "react-redux";
 
 class NewPost extends Component {
   state = {
     author: "",
     title: "",
-    textBody: ""
+    textBody: "",
+    categories: [],
+    category: ""
   };
+
+  componentDidMount() {
+    Axios.get("http://localhost:3001/categories", {
+      headers: { Authorization: true }
+    })
+      .then(response => {
+        const categories = response.data.categories;
+        this.setState({ categories });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   handleInputChange = e => {
     this.setState({
@@ -16,24 +33,46 @@ class NewPost extends Component {
   };
 
   createNewPost() {
-    const { title, author, textBody } = this.state;
+    const { title, author, textBody, category } = this.state;
     const id = Date.now() * Math.floor(Math.random() * 10 + 1);
     const timestamp = Date.now();
-    createPost(id, timestamp, title, author, textBody);
+    this.props.dispatch(
+      actionAddPostSuccess(id, timestamp, title, author, textBody, category)
+    );
     this.resetState();
   }
   resetState = () => {
     this.setState({
       title: "",
       author: "",
-      textBody: ""
+      textBody: "",
+      category: ""
     });
   };
 
   render() {
-    const { title, author, textBody } = this.state;
+    const { title, author, textBody, category } = this.state;
     return (
       <Form>
+        <div className="form-group">
+          <select
+            className="form-control"
+            value={this.state.categories}
+            onChange={e => this.setState({ category: e.target.value })}
+          >
+            {this.state.category === "" ? (
+              <option> </option>
+            ) : (
+              <option>{this.state.category}</option>
+            )}
+            {this.state.categories.map(item => (
+              <option key={item.name} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+            ;
+          </select>
+        </div>
         <Form.Field>
           <label>Author</label>
           <input
@@ -63,7 +102,7 @@ class NewPost extends Component {
         <Button
           color="green"
           type="submit"
-          onClick={() => this.createNewPost(title, author, textBody)}
+          onClick={() => this.createNewPost(title, author, textBody, category)}
         >
           Submit
         </Button>
@@ -71,4 +110,4 @@ class NewPost extends Component {
     );
   }
 }
-export default NewPost;
+export default connect()(NewPost);
