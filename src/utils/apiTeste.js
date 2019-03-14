@@ -46,6 +46,12 @@ export const voteUpComment = id => {
   return axios.post(`${api}/comments/${id}`, { option: "upVote" }, { headers });
 };
 
+// Delete comment
+export const deleteComment = id => {
+  console.log(id);
+  return axios.delete(`${api}/comments/${id}`, { headers });
+};
+
 export const createPost = (id, timestamp, title, body, author, category) => {
   return axios.post(
     `${api}/posts`,
@@ -61,8 +67,12 @@ export const createPost = (id, timestamp, title, body, author, category) => {
   );
 };
 
-// DELETE COMMET:
-export const deleteComment = id => {
-  console.log(id);
-  return axios.delete(`${api}/comments/${id}`, { headers });
+// Vote up a Post by Id
+export const voteUpPost = id => {
+  return axios.post(`${api}/posts/${id}`, { option: "upVote" }, { headers });
+};
+
+// Vote down a Post by Id
+export const voteDownPost = id => {
+  return axios.post(`${api}/posts/${id}`, { option: "downVote" }, { headers });
 };

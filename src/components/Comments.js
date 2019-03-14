@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Icon, Button, Comment } from "semantic-ui-react";
+
 import {
   fetchCommentById,
   voteDownById,
@@ -31,15 +33,36 @@ class Comments extends Component {
     return (
       <div>
         {Object.values(this.props.comments).map(comment => (
-          <div style={{ padding: "25px" }} key={comment.id}>
-            <button onClick={() => this.deleteComment(comment.id)}>X</button>
-            <h3> {comment.author} </h3>
-            <p> {comment.body} </p>
-            <p>{comment.voteScore}</p>
-            <button onClick={() => this.voteUpComment(comment.id)}>+</button>
-            <button onClick={() => this.voteDownComment(comment.id)}>-</button>
-          </div>
+          <Comment.Group>
+            <Comment
+              fluid
+              header="Option 1"
+              style={{ padding: "25px" }}
+              key={comment.id}
+            >
+              <Comment.Author>{comment.author} </Comment.Author>
+              <Comment.Text> {comment.body} </Comment.Text>
+              <Comment.Actions>
+                <Comment.Action>{comment.voteScore}</Comment.Action>
+                <Comment.Action onClick={() => this.voteUpComment(comment.id)}>
+                  <Icon name="thumbs up outline" />
+                  Up
+                </Comment.Action>
+                <Comment.Action
+                  onClick={() => this.voteDownComment(comment.id)}
+                >
+                  <Icon name="thumbs down outline" />
+                  Down
+                </Comment.Action>
+                <Comment.Action onClick={() => this.deleteComment(comment.id)}>
+                  <Icon name="delete" />
+                  Delete
+                </Comment.Action>
+              </Comment.Actions>
+            </Comment>
+          </Comment.Group>
         ))}
+
         <div>
           <NewComment postId={this.props.postId} />
         </div>

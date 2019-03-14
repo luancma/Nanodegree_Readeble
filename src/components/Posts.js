@@ -5,18 +5,42 @@ import Post from "./Post";
 import { fetchAllPosts } from "../store/actions/posts";
 
 class Posts extends Component {
+  state = {
+    orderByScore: true
+  };
+
   componentDidMount() {
     this.props.dispatch(fetchAllPosts());
   }
 
   render() {
-    console.log(this.props.posts);
+    const postDetails = Object.values(this.props.posts);
+
+    this.state.orderByScore
+      ? postDetails.sort(function(a, b) {
+          return b.voteScore - a.voteScore;
+        })
+      : postDetails.sort(function(a, b) {
+          return b.timestamp - a.timestamp;
+        });
     return (
-      <Container>
-        {Object.values(this.props.posts).map(post => (
-          <Post post={post} key={post.id} />
-        ))}
-      </Container>
+      <div>
+        {this.state.orderByScore ? (
+          <button onClick={() => this.setState({ orderByScore: false })}>
+            Order by date
+          </button>
+        ) : (
+          <button onClick={() => this.setState({ orderByScore: true })}>
+            Order by score
+          </button>
+        )}
+
+        <Container>
+          {postDetails.map(post => (
+            <Post post={post} key={post.id} />
+          ))}
+        </Container>
+      </div>
     );
   }
 }
