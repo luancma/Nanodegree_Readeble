@@ -1,10 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 import Comments from "./Comments";
-import { actionVoteUpPost, actionVoteDownPost } from "../store/actions/posts";
-import { Button } from "semantic-ui-react";
+import {
+  actionVoteUpPost,
+  actionVoteDownPost,
+  actionFetchPostById
+} from "../store/actions/posts";
+import { Button, Icon, Item } from "semantic-ui-react";
 
 class Details extends React.Component {
+  componentDidMount() {
+    this.props.dispatch(actionFetchPostById(this.props.match.params.id));
+  }
+
   votePostUp = id => {
     this.props.dispatch(actionVoteUpPost(id));
   };
@@ -13,30 +21,30 @@ class Details extends React.Component {
     this.props.dispatch(actionVoteDownPost(id));
   };
   render() {
-    console.log(this.props.posts);
+    const { post } = this.props;
     return (
       <div>
-        {Object.values(this.props.posts).map(
-          post =>
-            post.id == this.props.match.params.id && (
-              <div style={{ padding: "25px" }} key={post.id}>
-                <Button.Group>
-                  <Button positive onClick={() => this.votePostUp(post.id)}>
-                    +
-                  </Button>
-                  <Button.Or text={post.voteScore} />
-                  <Button negative onClick={() => this.votePostDown(post.id)}>
-                    -
-                  </Button>
-                </Button.Group>
-                <h1> {post.category} </h1>
-                <h1> Post: {post.title} </h1>
-                <h2> Author: {post.author} </h2>
+        <Item.Group key={post.id}>
+          <Item>
+            <Item.Content>
+              <Item.Header as="a">{post.author}</Item.Header>
+              <Item.Description>
                 <p>{post.body}</p>
-                <h1> Comentários : </h1>
-              </div>
-            )
-        )}
+              </Item.Description>
+              <Item.Extra>
+                <Button basic onClick={() => console.log("item")} icon>
+                  <Icon name="thumbs up outline" />
+                </Button>
+                <Button basic onClick={() => console.log("item")} icon>
+                  <Icon name="thumbs down outline" />
+                </Button>
+                <Button basic onClick={() => console.log("item")} icon>
+                  <Icon name="delete" />
+                </Button>
+              </Item.Extra>
+            </Item.Content>
+          </Item>
+        </Item.Group>
         <Comments postId={this.props.match.params.id} />
       </div>
     );
@@ -45,7 +53,8 @@ class Details extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    posts: state.posts
+    posts: state.posts,
+    post: state.post
   };
 };
 

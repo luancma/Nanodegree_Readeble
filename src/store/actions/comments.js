@@ -3,14 +3,16 @@ import {
   voteDownComment,
   voteUpComment,
   createNewComment,
-  deleteComment
+  deleteComment,
+  getCommentById
 } from "../../utils/apiTeste";
 export const FETCH_COMMENTS_BY_ID = "FETCH_COMMENTS_BY_ID";
 export const VOTE_COMMENT_DOWN = "VOTE_COMMENT_DOWN";
 export const VOTE_COMMENT_UP = "VOTE_COMMENT_UP";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
-export const DELETE_COMMENT_ERROR = "DELETE_COMMENT_ERROR";
+export const FETCH_COMMENT = "FETCH_COMMENT";
+
 export function fetchCommentByIdSuccess(comments) {
   return {
     type: FETCH_COMMENTS_BY_ID,
@@ -18,16 +20,16 @@ export function fetchCommentByIdSuccess(comments) {
   };
 }
 
-export function deleteCommentSuccess(comment) {
+export function fetchCommentSuccess(comment) {
   return {
-    type: DELETE_COMMENT,
+    type: FETCH_COMMENT,
     comment
   };
 }
 
-export function deleteCommentError(comment) {
+export function deleteCommentSuccess(comment) {
   return {
-    type: DELETE_COMMENT_ERROR,
+    type: DELETE_COMMENT,
     comment
   };
 }
@@ -96,6 +98,18 @@ export const voteDownById = id => {
     return voteDownComment(id)
       .then(response => {
         dispatch(voteDownByIdSuccess(response.data));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+};
+
+export const fetchComment = id => {
+  return dispatch => {
+    return getCommentById(id)
+      .then(response => {
+        dispatch(fetchCommentSuccess(response.data));
       })
       .catch(error => {
         console.log(error);

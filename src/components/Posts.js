@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container } from "semantic-ui-react";
+import { Container, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
 import Post from "./Post";
 import { fetchAllPosts } from "../store/actions/posts";
@@ -25,21 +25,17 @@ class Posts extends Component {
         });
     return (
       <div>
-        {this.state.orderByScore ? (
-          <button onClick={() => this.setState({ orderByScore: false })}>
-            Order by date
-          </button>
-        ) : (
-          <button onClick={() => this.setState({ orderByScore: true })}>
-            Order by score
-          </button>
-        )}
-
-        <Container>
-          {postDetails.map(post => (
-            <Post post={post} key={post.id} />
-          ))}
-        </Container>
+        <Button.Group>
+          <Button onClick={() => this.setState({ orderByScore: false })}>
+            Order by: Date
+          </Button>
+          <Button onClick={() => this.setState({ orderByScore: true })}>
+            Order by: Score
+          </Button>
+        </Button.Group>
+        {postDetails.map(post => (
+          <Post post={post} key={post.id} />
+        ))}
       </div>
     );
   }

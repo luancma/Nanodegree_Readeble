@@ -27,9 +27,18 @@ export const getAllPosts = () => {
   return axios.get(`${api}/posts`, { headers });
 };
 
+//Get all post by id
+export const getPostsById = id => {
+  return axios.get(`${api}/posts/${id}`, { headers });
+};
+
 //Get all comments of a specific post by Id
 export const getAllCommentsById = id => {
   return axios.get(`${api}/posts/${id}/comments`, { headers });
+};
+
+export const getCommentById = id => {
+  return axios.get(`${api}/comments/${id}`, { headers });
 };
 
 // Vote down a comment by Id

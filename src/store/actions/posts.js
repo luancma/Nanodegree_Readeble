@@ -2,9 +2,11 @@ import {
   getAllPosts,
   createPost,
   voteUpPost,
-  voteDownPost
+  voteDownPost,
+  getPostsById
 } from "../../utils/apiTeste";
 export const FETCH_POSTS = "FETCH_POSTS";
+export const FETCH_POST_ID = "FETCH_POST_ID";
 export const ACTION_ADD_POST = "ACTION_ADD_POST";
 export const ADD_VOTE_POST = "ADD_VOTE_POST";
 export const REMOVE_VOTE_POST = "REMOVE_VOTE_POST";
@@ -13,6 +15,13 @@ export function fetchAllPostsSuccess(posts) {
   return {
     type: FETCH_POSTS,
     posts
+  };
+}
+
+export function fetchPostIdSuccess(post) {
+  return {
+    type: FETCH_POST_ID,
+    post
   };
 }
 
@@ -81,6 +90,17 @@ export const actionVoteDownPost = id => {
   };
 };
 
+export const actionFetchPostById = id => {
+  return dispatch => {
+    return getPostsById(id)
+      .then(response => {
+        dispatch(fetchPostIdSuccess(response.data));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+};
 export const fetchAllPosts = () => {
   return dispatch => {
     return getAllPosts()

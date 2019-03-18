@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, TextArea, Button } from "semantic-ui-react";
+import { Form, TextArea, Button, Comment } from "semantic-ui-react";
 import { addComment } from "../store/actions/comments";
 import { connect } from "react-redux";
 
@@ -34,29 +34,36 @@ class NewComment extends Component {
   render() {
     const { author, commentBody } = this.state;
     return (
-      <Form>
-        <Form.Field>
-          <label>Author</label>
-          <h1> Criar novo comentário : </h1>
-          <input
-            placeholder="Author"
-            value={author}
-            name="author"
-            onChange={this.handleInputChange}
-          />
-        </Form.Field>
-        <Form.Field>
-          <TextArea
-            placeholder="Comment body"
-            value={commentBody}
-            name="commentBody"
-            onChange={this.handleInputChange}
-          />
-        </Form.Field>
-        <Button inverted color="green" onClick={() => this.handleSubmit()}>
-          Send comment
-        </Button>
-      </Form>
+      <Comment.Group>
+        <Comment>
+          <Comment.Content>
+            <Form reply>
+              <input
+                placeholder="Author"
+                value={author}
+                name="author"
+                onChange={this.handleInputChange}
+              />
+              <Form.TextArea
+                style={{ marginTop: "20px" }}
+                placeholder="Comment body"
+                value={commentBody}
+                name="commentBody"
+                onChange={this.handleInputChange}
+              />
+              <Button
+                style={{ marginBottom: "20px" }}
+                content="Add Reply"
+                labelPosition="left"
+                icon="edit"
+                inverted
+                color="green"
+                onClick={() => this.handleSubmit()}
+              />
+            </Form>
+          </Comment.Content>
+        </Comment>
+      </Comment.Group>
     );
   }
 }
