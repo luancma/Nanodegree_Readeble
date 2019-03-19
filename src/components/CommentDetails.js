@@ -1,17 +1,15 @@
 import React, { Component } from "react";
-import { Icon, Comment } from "semantic-ui-react";
 import { connect } from "react-redux";
 import {
   voteDownById,
   voteUpById,
-  deleteCommentAction,
-  fetchComment
+  deleteCommentAction
 } from "../store/actions/comments";
+import { actionFetchComment } from "../store/actions/comment";
 
 class CommentDetails extends Component {
   componentDidMount() {
-    console.log(this.props.commentID);
-    this.props.dispatch(fetchComment(this.props.commentID));
+    this.props.dispatch(actionFetchComment(this.props.commentRef.id));
   }
 
   voteDownComment = id => {
@@ -28,23 +26,16 @@ class CommentDetails extends Component {
   };
 
   render() {
-    console.log(this.props.comment);
+    console.log(this.props.commentRef.id);
     return (
       <div>
-        {Object.values(this.props.comment).map(item => (
-          <div key={item.id}>
-            <p>{item.id}</p>
-          </div>
-        ))}
+        <button onClick={() => this.voteUpComment(this.props.commentRef.id)}>
+          +
+        </button>
+        <h1>{this.props.commentRef.voteScore}</h1>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    comment: state.comment
-  };
-};
-
-export default connect(mapStateToProps)(CommentDetails);
+export default connect()(CommentDetails);

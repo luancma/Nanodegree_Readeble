@@ -33,13 +33,14 @@ class Comments extends Component {
   render() {
     return (
       <div>
-        {Object.values(this.props.comments).map(comment => (
-          <CommentDetails commentID={comment.id} />
+        {this.props.comments.map(item => (
+          <div>
+            <p>{item.voteScore}</p>
+            <h4>{item.body}</h4>
+            <button onClick={() => this.voteUpComment(item.id)}>+</button>
+            <button onClick={() => this.voteDownComment(item.id)}>-</button>
+          </div>
         ))}
-
-        <div>
-          <NewComment postId={this.props.postId} />
-        </div>
       </div>
     );
   }
