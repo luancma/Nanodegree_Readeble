@@ -14,27 +14,44 @@ class Posts extends Component {
   }
 
   render() {
-    const postDetails = Object.values(this.props.posts);
-
     this.state.orderByScore
-      ? postDetails.sort(function(a, b) {
+      ? this.props.posts.sort(function(a, b) {
           return b.voteScore - a.voteScore;
         })
-      : postDetails.sort(function(a, b) {
+      : this.props.posts.sort(function(a, b) {
           return b.timestamp - a.timestamp;
         });
     return (
       <div>
-        <Button.Group>
-          <Button onClick={() => this.setState({ orderByScore: false })}>
-            Order by: Date
-          </Button>
-          <Button onClick={() => this.setState({ orderByScore: true })}>
-            Order by: Score
-          </Button>
+        <Button.Group size="large">
+          {this.state.orderByScore ? (
+            <Button
+              positive
+              onClick={() => this.setState({ orderByScore: true })}
+            >
+              Order by: Score
+            </Button>
+          ) : (
+            <Button onClick={() => this.setState({ orderByScore: true })}>
+              Order by: Score
+            </Button>
+          )}
+          <Button.Or text="ou" />
+          {this.state.orderByScore === false ? (
+            <Button
+              positive
+              onClick={() => this.setState({ orderByScore: false })}
+            >
+              Order by: Date
+            </Button>
+          ) : (
+            <Button onClick={() => this.setState({ orderByScore: false })}>
+              Order by: Date
+            </Button>
+          )}
         </Button.Group>
-        {postDetails.map(post => (
-          <Post post={post} key={post.id} />
+        {this.props.posts.map(post => (
+          <Post postDetails={post} key={post.id} />
         ))}
       </div>
     );

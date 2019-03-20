@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Icon, Button, Comment } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 
 import {
   fetchCommentById,
@@ -34,13 +34,9 @@ class Comments extends Component {
     return (
       <div>
         {this.props.comments.map(item => (
-          <div>
-            <p>{item.voteScore}</p>
-            <h4>{item.body}</h4>
-            <button onClick={() => this.voteUpComment(item.id)}>+</button>
-            <button onClick={() => this.voteDownComment(item.id)}>-</button>
-          </div>
+          <CommentDetails commentDetails={item} />
         ))}
+        <NewComment postId={this.props.postId} />
       </div>
     );
   }

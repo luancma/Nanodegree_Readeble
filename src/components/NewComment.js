@@ -45,6 +45,7 @@ class NewComment extends Component {
                 onChange={this.handleInputChange}
               />
               <Form.TextArea
+                rows={1}
                 style={{ marginTop: "20px" }}
                 placeholder="Comment body"
                 value={commentBody}
@@ -53,9 +54,9 @@ class NewComment extends Component {
               />
               <Button
                 style={{ marginBottom: "20px" }}
-                content="Add Reply"
+                content="Send"
                 labelPosition="left"
-                icon="edit"
+                icon="send"
                 inverted
                 color="green"
                 onClick={() => this.handleSubmit()}

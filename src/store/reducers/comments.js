@@ -19,13 +19,15 @@ const comments = (state = [], action) => {
 
     case VOTE_COMMENT_DOWN:
       return [
-        ...state.map(
-          item => item.id === action.comment.id && action.comment.voteScore
-        )
+        ...state.map(item => {
+          return item.id === action.comment.id ? action.comment : item;
+        })
       ];
     case VOTE_COMMENT_UP:
       return [
-        ...state.map(item => item.id === action.comment.id && action.comment)
+        ...state.map(item => {
+          return item.id === action.comment.id ? action.comment : item;
+        })
       ];
     default:
       return state;

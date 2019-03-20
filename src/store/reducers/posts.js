@@ -8,36 +8,26 @@ import {
 const posts = (state = [], action) => {
   switch (action.type) {
     case FETCH_POSTS:
-      return {
-        ...state,
-        ...action.posts
-      };
+      return [...state, ...action.posts];
     case FETCH_POST_ID:
       return {
         ...state,
-        ...Object.values(state).map(
-          item => item.id === action.post.id && action.post
-        )
+        ...console.log(state)
       };
     case ACTION_ADD_POST:
-      return {
-        ...state,
-        ...console.log(action.post)
-      };
+      return [...state.concat(action.post)];
     case ADD_VOTE_POST:
-      return {
-        ...state,
-        ...Object.values(state).map(
-          item => item.id === action.post.id && action.post
-        )
-      };
+      return [
+        ...state.map(item => {
+          return item.id === action.post.id ? action.post : item;
+        })
+      ];
     case REMOVE_VOTE_POST:
-      return {
-        ...state,
-        ...Object.values(state).map(
-          item => item.id === action.post.id && action.post
-        )
-      };
+      return [
+        ...state.map(item => {
+          return item.id === action.post.id ? action.post : item;
+        })
+      ];
     default:
       return state;
   }
