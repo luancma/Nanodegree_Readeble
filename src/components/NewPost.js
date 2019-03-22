@@ -102,7 +102,7 @@ class NewPost extends Component {
         <Button
           color="green"
           type="submit"
-          onClick={() => this.createNewPost(title, author, textBody, category)}
+          onClick={() => this.createNewPost(author, title, textBody, category)}
         >
           Submit
         </Button>

@@ -19,6 +19,7 @@ class CommentDetails extends Component {
   };
 
   render() {
+    console.log(this.props.commentDetails);
     const { id, body, voteScore, author } = this.props.commentDetails;
     return (
       <Comment.Group>

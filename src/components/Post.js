@@ -8,12 +8,17 @@ class Post extends React.Component {
     console.log(this.props.postDetails);
     return (
       <div>
-        <Link to={`Post/${this.props.postDetails.id}`}>Link</Link>
-        <Card.Group>
-          <Card fluid color="green" style={{ padding: "25px" }}>
-            {this.props.postDetails.body}
-          </Card>
-        </Card.Group>
+        <Link
+          to={`Post/${this.props.postDetails.id}`}
+          style={{ color: "black" }}
+        >
+          <Card.Group>
+            <Card fluid color="green" style={{ padding: "25px" }}>
+              <h1>{this.props.postDetails.title}</h1>
+              <p>{this.props.postDetails.author}</p>
+            </Card>
+          </Card.Group>
+        </Link>
       </div>
     );
   }

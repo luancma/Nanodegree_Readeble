@@ -6,7 +6,7 @@ import { fetchAllPosts } from "../store/actions/posts";
 
 class Posts extends Component {
   state = {
-    orderByScore: true
+    orderByScore: false
   };
 
   componentDidMount() {
@@ -24,19 +24,6 @@ class Posts extends Component {
     return (
       <div>
         <Button.Group size="large">
-          {this.state.orderByScore ? (
-            <Button
-              positive
-              onClick={() => this.setState({ orderByScore: true })}
-            >
-              Order by: Score
-            </Button>
-          ) : (
-            <Button onClick={() => this.setState({ orderByScore: true })}>
-              Order by: Score
-            </Button>
-          )}
-          <Button.Or text="ou" />
           {this.state.orderByScore === false ? (
             <Button
               positive
@@ -47,6 +34,19 @@ class Posts extends Component {
           ) : (
             <Button onClick={() => this.setState({ orderByScore: false })}>
               Order by: Date
+            </Button>
+          )}
+          <Button.Or />
+          {this.state.orderByScore ? (
+            <Button
+              positive
+              onClick={() => this.setState({ orderByScore: true })}
+            >
+              Order by: Score
+            </Button>
+          ) : (
+            <Button onClick={() => this.setState({ orderByScore: true })}>
+              Order by: Score
             </Button>
           )}
         </Button.Group>

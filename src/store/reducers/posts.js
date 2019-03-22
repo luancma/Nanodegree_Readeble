@@ -8,7 +8,7 @@ import {
 const posts = (state = [], action) => {
   switch (action.type) {
     case FETCH_POSTS:
-      return [...state, ...action.posts];
+      return [...action.posts];
     case FETCH_POST_ID:
       return {
         ...state,

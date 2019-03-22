@@ -27,14 +27,13 @@ class Details extends React.Component {
   votePostDown = id => {
     this.props.dispatch(actionVoteDownPost(id));
   };
+
   render() {
-    console.log(this.props.posts);
-    const { posts } = this.props;
     return (
       <div>
         {this.props.posts.map(
           item =>
-            item.id === Number(this.props.match.params.id) && (
+            item.id == this.props.match.params.id && (
               <Grid centered columns={1}>
                 <Grid.Column>
                   <Card.Group>
