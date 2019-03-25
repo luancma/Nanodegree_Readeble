@@ -3,13 +3,15 @@ import {
   createPost,
   voteUpPost,
   voteDownPost,
-  getPostsById
+  getPostsById,
+  deletePost
 } from "../../utils/apiTeste";
 export const FETCH_POSTS = "FETCH_POSTS";
 export const FETCH_POST_ID = "FETCH_POST_ID";
 export const ACTION_ADD_POST = "ACTION_ADD_POST";
 export const ADD_VOTE_POST = "ADD_VOTE_POST";
 export const REMOVE_VOTE_POST = "REMOVE_VOTE_POST";
+export const DELETE_POST = "DELETE_POST";
 
 export function fetchAllPostsSuccess(posts) {
   return {
@@ -21,6 +23,13 @@ export function fetchAllPostsSuccess(posts) {
 export function fetchPostIdSuccess(post) {
   return {
     type: FETCH_POST_ID,
+    post
+  };
+}
+
+export function deletePostSuccess(post) {
+  return {
+    type: DELETE_POST,
     post
   };
 }
@@ -45,6 +54,20 @@ export function addPostSuccess(post) {
     post
   };
 }
+
+export const actionDeletePost = id => {
+  return dispatch => {
+    console.log(id);
+    return deletePost(id)
+      .then(response => {
+        dispatch(deletePostSuccess(response.data));
+        console.log("DELETADO COM SUCESSO");
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+};
 
 export const actionAddPostSuccess = (
   id,

@@ -23,36 +23,44 @@ class Posts extends Component {
         });
     return (
       <div>
-        <Button.Group size="large">
-          {this.state.orderByScore === false ? (
-            <Button
-              positive
-              onClick={() => this.setState({ orderByScore: false })}
-            >
-              Order by: Date
-            </Button>
-          ) : (
-            <Button onClick={() => this.setState({ orderByScore: false })}>
-              Order by: Date
-            </Button>
-          )}
-          <Button.Or />
-          {this.state.orderByScore ? (
-            <Button
-              positive
-              onClick={() => this.setState({ orderByScore: true })}
-            >
-              Order by: Score
-            </Button>
-          ) : (
-            <Button onClick={() => this.setState({ orderByScore: true })}>
-              Order by: Score
-            </Button>
-          )}
-        </Button.Group>
-        {this.props.posts.map(post => (
-          <Post postDetails={post} key={post.id} />
-        ))}
+        {this.props.posts.length !== 0 ? (
+          <div>
+            <Button.Group size="large">
+              {this.state.orderByScore === false ? (
+                <Button
+                  positive
+                  onClick={() => this.setState({ orderByScore: false })}
+                >
+                  Order by: Date
+                </Button>
+              ) : (
+                <Button onClick={() => this.setState({ orderByScore: false })}>
+                  Order by: Date
+                </Button>
+              )}
+              <Button.Or />
+              {this.state.orderByScore ? (
+                <Button
+                  positive
+                  onClick={() => this.setState({ orderByScore: true })}
+                >
+                  Order by: Score
+                </Button>
+              ) : (
+                <Button onClick={() => this.setState({ orderByScore: true })}>
+                  Order by: Score
+                </Button>
+              )}
+            </Button.Group>
+            {this.props.posts.map(post => (
+              <Post postDetails={post} key={post.id} />
+            ))}
+          </div>
+        ) : (
+          <Container>
+            <h1>No posts found</h1>
+          </Container>
+        )}
       </div>
     );
   }

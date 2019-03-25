@@ -18,6 +18,10 @@ class CommentDetails extends Component {
     this.props.dispatch(voteUpById(id));
   };
 
+  deleteComment = id => {
+    this.props.dispatch(deleteCommentAction(id));
+  };
+
   render() {
     console.log(this.props.commentDetails);
     const { id, body, voteScore, author } = this.props.commentDetails;
@@ -40,6 +44,13 @@ class CommentDetails extends Component {
                 onClick={() => this.voteDownComment(id)}
               >
                 <Icon name="thumbs down outline" />
+              </Comment.Action>
+
+              <Comment.Action
+                style={{ marginLeft: "10px" }}
+                onClick={() => this.deleteComment(id)}
+              >
+                <Icon name="remove" />
               </Comment.Action>
             </Comment.Actions>
           </Comment.Content>

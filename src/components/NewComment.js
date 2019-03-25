@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, TextArea, Button, Comment } from "semantic-ui-react";
+import { Form, Button, Comment } from "semantic-ui-react";
 import { addComment } from "../store/actions/comments";
 import { connect } from "react-redux";
 
@@ -34,37 +34,39 @@ class NewComment extends Component {
   render() {
     const { author, commentBody } = this.state;
     return (
-      <Comment.Group>
-        <Comment>
-          <Comment.Content>
-            <Form reply>
-              <input
-                placeholder="Author"
-                value={author}
-                name="author"
-                onChange={this.handleInputChange}
-              />
-              <Form.TextArea
-                rows={1}
-                style={{ marginTop: "20px" }}
-                placeholder="Comment body"
-                value={commentBody}
-                name="commentBody"
-                onChange={this.handleInputChange}
-              />
-              <Button
-                style={{ marginBottom: "20px" }}
-                content="Send"
-                labelPosition="left"
-                icon="send"
-                inverted
-                color="green"
-                onClick={() => this.handleSubmit()}
-              />
-            </Form>
-          </Comment.Content>
-        </Comment>
-      </Comment.Group>
+      <div>
+        <Comment.Group>
+          <Comment>
+            <Comment.Content>
+              <Form reply>
+                <input
+                  placeholder="Author"
+                  value={author}
+                  name="author"
+                  onChange={this.handleInputChange}
+                />
+                <Form.TextArea
+                  rows={1}
+                  style={{ marginTop: "20px" }}
+                  placeholder="Comment body"
+                  value={commentBody}
+                  name="commentBody"
+                  onChange={this.handleInputChange}
+                />
+                <Button
+                  style={{ marginBottom: "20px" }}
+                  content="Send"
+                  labelPosition="left"
+                  icon="send"
+                  inverted
+                  color="green"
+                  onClick={() => this.handleSubmit()}
+                />
+              </Form>
+            </Comment.Content>
+          </Comment>
+        </Comment.Group>
+      </div>
     );
   }
 }

@@ -7,6 +7,8 @@ import { Switch, Route, Link } from "react-router-dom";
 import NotFound from "./components/NotFound";
 import Details from "./components/Details";
 import { Container, Menu, Segment } from "semantic-ui-react";
+import NavBar from "./components/NavBar";
+import CategoryDetails from "./components/CategoryDetails";
 
 class App extends Component {
   render() {
@@ -27,9 +29,15 @@ class App extends Component {
             <Route exact path="/" component={Posts} />
             <Route exact path="/newPost" component={NewPost} />
             <Route exact path="/Post/:id" component={Details} />
+            <Route
+              exact
+              path="/Category/:category"
+              component={CategoryDetails}
+            />
             <Route component={NotFound} />
           </Switch>
         </Container>
+        <NavBar />
       </div>
     );
   }

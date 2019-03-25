@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router";
 import { Form, TextArea, FormField, Button } from "semantic-ui-react";
 import Axios from "axios";
 import { actionAddPostSuccess } from "../store/actions/posts";
@@ -10,7 +11,8 @@ class NewPost extends Component {
     title: "",
     textBody: "",
     categories: [],
-    category: ""
+    category: "",
+    redirect: false
   };
 
   componentDidMount() {
@@ -46,67 +48,76 @@ class NewPost extends Component {
       title: "",
       author: "",
       textBody: "",
-      category: ""
+      category: "",
+      redirect: true
     });
   };
 
   render() {
-    const { title, author, textBody, category } = this.state;
+    const { title, author, textBody, category, redirect } = this.state;
     return (
-      <Form>
-        <div className="form-group">
-          <select
-            className="form-control"
-            value={this.state.categories}
-            onChange={e => this.setState({ category: e.target.value })}
-          >
-            {this.state.category === "" ? (
-              <option> </option>
-            ) : (
-              <option>{this.state.category}</option>
-            )}
-            {this.state.categories.map(item => (
-              <option key={item.name} value={item.name}>
-                {item.name}
-              </option>
-            ))}
-            ;
-          </select>
-        </div>
-        <Form.Field>
-          <label>Author</label>
-          <input
-            placeholder="First Name"
-            name="author"
-            value={author}
-            onChange={this.handleInputChange}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Title</label>
-          <input
-            placeholder="Title"
-            name="title"
-            value={title}
-            onChange={this.handleInputChange}
-          />
-        </Form.Field>
-        <FormField>
-          <TextArea
-            placeholder="Text body"
-            name="textBody"
-            value={textBody}
-            onChange={this.handleInputChange}
-          />
-        </FormField>
-        <Button
-          color="green"
-          type="submit"
-          onClick={() => this.createNewPost(author, title, textBody, category)}
-        >
-          Submit
-        </Button>
-      </Form>
+      <div>
+        {redirect === false ? (
+          <Form>
+            <div className="form-group">
+              <select
+                className="form-control"
+                value={this.state.categories}
+                onChange={e => this.setState({ category: e.target.value })}
+              >
+                {this.state.category === "" ? (
+                  <option> </option>
+                ) : (
+                  <option>{this.state.category}</option>
+                )}
+                {this.state.categories.map(item => (
+                  <option key={item.name} value={item.name}>
+                    {item.name}
+                  </option>
+                ))}
+                ;
+              </select>
+            </div>
+            <Form.Field>
+              <label>Author</label>
+              <input
+                placeholder="First Name"
+                name="author"
+                value={author}
+                onChange={this.handleInputChange}
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>Title</label>
+              <input
+                placeholder="Title"
+                name="title"
+                value={title}
+                onChange={this.handleInputChange}
+              />
+            </Form.Field>
+            <FormField>
+              <TextArea
+                placeholder="Text body"
+                name="textBody"
+                value={textBody}
+                onChange={this.handleInputChange}
+              />
+            </FormField>
+            <Button
+              color="green"
+              type="submit"
+              onClick={() =>
+                this.createNewPost(author, title, textBody, category)
+              }
+            >
+              Submit
+            </Button>
+          </Form>
+        ) : (
+          <Redirect to="/" />
+        )}
+      </div>
     );
   }
 }
