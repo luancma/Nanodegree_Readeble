@@ -6,24 +6,15 @@ import NewPost from "./components/NewPost";
 import { Switch, Route, Link } from "react-router-dom";
 import NotFound from "./components/NotFound";
 import Details from "./components/Details";
-import { Container, Menu, Segment } from "semantic-ui-react";
-import NavBar from "./components/NavBar";
+import { Container } from "semantic-ui-react";
 import CategoryDetails from "./components/CategoryDetails";
+import Nav from "./components/NavBar";
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Segment inverted>
-          <Menu inverted secondary>
-            <Menu.Item>
-              <Link to="/">Home</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/newPost">New Post</Link>
-            </Menu.Item>
-          </Menu>
-        </Segment>
+        <Nav />
         <Container>
           <Switch>
             <Route exact path="/" component={Posts} />
@@ -37,7 +28,6 @@ class App extends Component {
             <Route component={NotFound} />
           </Switch>
         </Container>
-        <NavBar />
       </div>
     );
   }

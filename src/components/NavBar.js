@@ -1,53 +1,49 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import React from "react";
+import { NavLink, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import Axios from "axios";
+import { actionGetAllCategories } from "../store/actions/categories";
+import { Dropdown, Menu, Segment } from "semantic-ui-react";
 
-class NavBar extends Component {
-  state = {
-    categories: [],
-    redirect: false,
-    category: ""
-  };
-
+class Nav extends React.Component {
   componentDidMount() {
-    Axios.get(`http://localhost:3001/categories`, {
-      headers: { Authorization: "dasodka" }
-    }).then(response => {
-      this.setState({
-        categories: response.data.categories
-      });
-    });
+    this.props.dispatch(actionGetAllCategories());
   }
-
-  goToPageDetails = path => {
-    this.setState({
-      redirect: true,
-      category: path
-    });
-  };
-
   render() {
     return (
-      <div>
-        {this.state.redirect === true ? (
-          <Redirect to={`Category/${this.state.category}`} />
-        ) : (
-          <div>
-            <ul>
-              {this.state.categories.map(item => (
-                <li>
-                  <button onClick={() => this.goToPageDetails(item.path)}>
-                    {item.path}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
+      <Segment inverted>
+        <Menu inverted pointing secondary>
+          <Menu.Item name="home">
+            <NavLink to="/" exact activeClassName="active">
+              Home
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item name="messages">
+            <NavLink to="/newPost" exact activeClassName="active">
+              New Post
+            </NavLink>
+          </Menu.Item>
+          <Menu.Menu>
+            <Dropdown item text="Category">
+              <Dropdown.Menu>
+                {this.props.categories.map(item => (
+                  <NavLink to={`/Category/${item.path}`}>
+                    <Dropdown.Item style={{ color: "black" }}>
+                      {item.path}
+                    </Dropdown.Item>
+                  </NavLink>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
+          </Menu.Menu>
+        </Menu>
+      </Segment>
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    categories: state.categories
+  };
+};
 
-export default connect()(NavBar);
+export default connect(mapStateToProps)(Nav);

@@ -4,7 +4,7 @@ class CategoryDetails extends Component {
   render() {
     return (
       <div>
-        <h1>Detalhes da categoria</h1>
+        <h1>Detalhes da categoria {this.props.match.params.category}</h1>
       </div>
     );
   }

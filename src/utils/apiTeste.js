@@ -96,3 +96,7 @@ export const voteDownPost = id => {
 export const getAllCategory = () => {
   return axios.get(`http://localhost:3001/categories`, { headers });
 };
+
+export const getCategoryDefined = category => {
+  return axios.get(`${api}/${category}/posts`, { headers });
+};
