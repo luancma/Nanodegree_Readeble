@@ -1,26 +1,25 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { actionFetchPostsByCategory } from "../store/actions/posts";
 import { Container, Button } from "semantic-ui-react";
+import { connect } from "react-redux";
 import Post from "./Post";
+import { fetchAllPosts } from "../store/actions/posts";
 
-class CategoryDetails extends Component {
+class PostsDetails extends Component {
   state = {
     orderByScore: false
   };
 
   render() {
     this.state.orderByScore
-      ? this.props.details.sort(function(a, b) {
+      ? this.props.posts.sort(function(a, b) {
           return b.voteScore - a.voteScore;
         })
-      : this.props.details.sort(function(a, b) {
+      : this.props.posts.sort(function(a, b) {
           return b.timestamp - a.timestamp;
         });
-
     return (
       <div>
-        {this.props.details.length !== 0 ? (
+        {this.props.posts.length !== 0 ? (
           <div>
             <Button.Group size="large">
               {this.state.orderByScore === false ? (
@@ -49,12 +48,9 @@ class CategoryDetails extends Component {
                 </Button>
               )}
             </Button.Group>
-            {this.props.details.map(
-              post =>
-                post.category === this.props.match.params.category && (
-                  <Post postDetails={post} key={post.id} />
-                )
-            )}
+            {this.props.posts.map(post => (
+              <Post postDetails={post} key={post.id} />
+            ))}
           </div>
         ) : (
           <Container>
@@ -66,10 +62,4 @@ class CategoryDetails extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    details: state.posts
-  };
-};
-
-export default connect(mapStateToProps)(CategoryDetails);
+export default PostsDetails;

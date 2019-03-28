@@ -4,9 +4,11 @@ import {
   voteUpPost,
   voteDownPost,
   getPostsById,
-  deletePost
+  deletePost,
+  getCategoryDefined
 } from "../../utils/apiTeste";
 export const FETCH_POSTS = "FETCH_POSTS";
+export const FETCH_POST_BY_CATEGORY = "FETCH_POST_BY_CATEGORY";
 export const FETCH_POST_ID = "FETCH_POST_ID";
 export const ACTION_ADD_POST = "ACTION_ADD_POST";
 export const ADD_VOTE_POST = "ADD_VOTE_POST";
@@ -17,6 +19,13 @@ export function fetchAllPostsSuccess(posts) {
   return {
     type: FETCH_POSTS,
     posts
+  };
+}
+
+export function fetchPostByCategorySuccess(post) {
+  return {
+    type: FETCH_POST_BY_CATEGORY,
+    post
   };
 }
 
@@ -129,6 +138,19 @@ export const fetchAllPosts = () => {
     return getAllPosts()
       .then(response => {
         dispatch(fetchAllPostsSuccess(response.data));
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+};
+
+export const actionFetchPostsByCategory = category => {
+  return dispatch => {
+    return getCategoryDefined(category)
+      .then(response => {
+        dispatch(fetchPostByCategorySuccess(response.data));
         console.log(response.data);
       })
       .catch(error => {

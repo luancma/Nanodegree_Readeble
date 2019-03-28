@@ -9,7 +9,7 @@ class Post extends React.Component {
     return (
       <div>
         <Link
-          to={`Post/${this.props.postDetails.id}`}
+          to={`/Post/${this.props.postDetails.id}`}
           style={{ color: "black" }}
         >
           <Card.Group>

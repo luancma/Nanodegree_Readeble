@@ -4,7 +4,8 @@ import {
   ADD_VOTE_POST,
   REMOVE_VOTE_POST,
   FETCH_POST_ID,
-  DELETE_POST
+  DELETE_POST,
+  FETCH_POST_BY_CATEGORY
 } from "../actions/posts";
 const posts = (state = [], action) => {
   switch (action.type) {
@@ -16,6 +17,13 @@ const posts = (state = [], action) => {
         ...state,
         ...console.log(state)
       };
+
+    case FETCH_POST_BY_CATEGORY:
+      return [
+        ...state.map(item => {
+          return item.category === action.post.category ? action.post : item;
+        })
+      ];
 
     case DELETE_POST:
       return [...state.filter(item => item.id != action.post.id)];
