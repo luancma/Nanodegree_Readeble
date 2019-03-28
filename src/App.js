@@ -9,6 +9,7 @@ import Details from "./components/Details";
 import { Container } from "semantic-ui-react";
 import CategoryDetails from "./components/CategoryDetails";
 import Nav from "./components/NavBar";
+import EditPost from "./components/EditPost";
 
 class App extends Component {
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
               path="/Category/:category"
               component={CategoryDetails}
             />
+            <Route exact path="/Edit/:id" component={EditPost} />
             <Route component={NotFound} />
           </Switch>
         </Container>

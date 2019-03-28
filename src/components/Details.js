@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router";
+import { Redirect, Link } from "react-router-dom";
 import Comments from "./Comments";
 import {
   actionVoteUpPost,
@@ -13,12 +13,19 @@ import Posts from "./Posts";
 
 class Details extends React.Component {
   state = {
-    redirect: false
+    redirect: false,
+    editePost: false
   };
 
   componentDidMount() {
     this.props.dispatch(fetchAllPosts());
   }
+
+  btnEditPost = () => {
+    this.setState({
+      editePost: true
+    });
+  };
 
   votePostUp = id => {
     console.log(id);
@@ -77,6 +84,12 @@ class Details extends React.Component {
                                 >
                                   <Icon name="delete" />
                                 </Button>
+
+                                <Link to={`/Edit/${item.id}`}>
+                                  <Button basic icon>
+                                    <Icon name="edit outline" />
+                                  </Button>
+                                </Link>
                               </Item.Extra>
                             </Item.Content>
                           </Item>

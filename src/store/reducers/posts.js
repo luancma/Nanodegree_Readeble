@@ -13,10 +13,7 @@ const posts = (state = [], action) => {
       return [...action.posts];
 
     case FETCH_POST_ID:
-      return {
-        ...state,
-        ...console.log(state)
-      };
+      return [...state.map(post => post.id == action.post.id && post)];
 
     case FETCH_POST_BY_CATEGORY:
       return [

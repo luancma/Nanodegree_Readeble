@@ -127,6 +127,7 @@ export const actionFetchPostById = id => {
     return getPostsById(id)
       .then(response => {
         dispatch(fetchPostIdSuccess(response.data));
+        console.log(response.data);
       })
       .catch(error => {
         console.log(error);
