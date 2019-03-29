@@ -105,14 +105,16 @@ class NewPost extends Component {
               />
             </FormField>
             <Button
+              style={{ marginBottom: "20px" }}
+              content="Send"
+              labelPosition="left"
+              icon="edit"
+              inverted
               color="green"
-              type="submit"
               onClick={() =>
                 this.createNewPost(author, title, textBody, category)
               }
-            >
-              Submit
-            </Button>
+            />
           </Form>
         ) : (
           <Redirect to="/" />

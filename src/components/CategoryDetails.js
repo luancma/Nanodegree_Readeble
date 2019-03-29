@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { actionFetchPostsByCategory } from "../store/actions/posts";
 import { Container, Button } from "semantic-ui-react";
 import Post from "./Post";
-
+import { Link } from "react-router-dom";
 class CategoryDetails extends Component {
   state = {
     orderByScore: false
@@ -22,6 +22,9 @@ class CategoryDetails extends Component {
       <div>
         {this.props.details.length !== 0 ? (
           <div>
+            <Link to={`/newPost/${this.props.match.params.category}`}>
+              <Button attached="top">Create Post</Button>
+            </Link>
             <Button.Group size="large">
               {this.state.orderByScore === false ? (
                 <Button

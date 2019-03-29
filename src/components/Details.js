@@ -64,32 +64,37 @@ class Details extends React.Component {
                               </Item.Description>
                               <Item.Extra>
                                 <Button
-                                  basic
-                                  onClick={() => this.votePostUp(item.id)}
+                                  inverted
+                                  color="blue"
+                                  circular
                                   icon
+                                  onClick={() => this.votePostUp(item.id)}
                                 >
                                   <Icon name="thumbs up outline" />
                                 </Button>
                                 <Button
-                                  basic
-                                  onClick={() => this.votePostDown(item.id)}
+                                  inverted
+                                  color="blue"
+                                  circular
                                   icon
+                                  onClick={() => this.votePostDown(item.id)}
                                 >
                                   <Icon name="thumbs down outline" />
                                 </Button>
-                                <Button
-                                  basic
-                                  onClick={() => this.deletePost(item.id)}
-                                  icon
-                                >
-                                  <Icon name="delete" />
-                                </Button>
-
                                 <Link to={`/Edit/${item.id}`}>
-                                  <Button basic icon>
+                                  <Button inverted color="purple" circular icon>
                                     <Icon name="edit outline" />
                                   </Button>
                                 </Link>
+                                <Button
+                                  inverted
+                                  color="red"
+                                  circular
+                                  icon
+                                  onClick={() => this.deletePost(item.id)}
+                                >
+                                  <Icon name="delete" />
+                                </Button>
                               </Item.Extra>
                             </Item.Content>
                           </Item>
