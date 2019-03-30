@@ -100,3 +100,15 @@ export const getAllCategory = () => {
 export const getCategoryDefined = category => {
   return axios.get(`${api}/${category}/posts`, { headers });
 };
+
+//////////EDIT:
+export const editPost = (id, title, body) => {
+  return axios.put(
+    `${api}/posts/${id}`,
+    {
+      title,
+      body
+    },
+    { headers }
+  );
+};

@@ -12,33 +12,23 @@ import Nav from "./components/NavBar";
 import EditPost from "./components/EditPost";
 import NewPostCategory from "./components/NewPostCategory";
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <Nav />
-        <Container>
-          <Switch>
-            <Route exact path="/" component={Posts} />
-            <Route exact path="/newPost" component={NewPost} />
-            <Route
-              exact
-              path="/newPost/:category"
-              component={NewPostCategory}
-            />
-            <Route exact path="/Post/:id" component={Details} />
-            <Route
-              exact
-              path="/Category/:category"
-              component={CategoryDetails}
-            />
-            <Route exact path="/Edit/:id" component={EditPost} />
-            <Route component={NotFound} />
-          </Switch>
-        </Container>
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <div>
+      <Nav />
+      <Container>
+        <Switch>
+          <Route exact path="/" component={Posts} />
+          <Route exact path="/newPost" component={NewPost} />
+          <Route exact path="/newPost/:category" component={NewPostCategory} />
+          <Route exact path="/:category/:post_id" component={Details} />
+          <Route exact path="/:category" component={CategoryDetails} />
+          <Route exact path="/Edit/:id" component={EditPost} />
+          <Route component={NotFound} />
+        </Switch>
+      </Container>
+    </div>
+  );
+};
 
 export default App;

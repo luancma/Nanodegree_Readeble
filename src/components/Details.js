@@ -49,7 +49,7 @@ class Details extends React.Component {
         ) : (
           this.props.posts.map(
             item =>
-              item.id == this.props.match.params.id && (
+              item.id == this.props.match.params.post_id && (
                 <Grid centered columns={1}>
                   <Grid.Column>
                     <Card.Group>
@@ -99,7 +99,7 @@ class Details extends React.Component {
                             </Item.Content>
                           </Item>
                         </Item.Group>
-                        <Comments postId={this.props.match.params.id} />
+                        <Comments postId={this.props.match.params.post_id} />
                       </Card>
                     </Card.Group>
                   </Grid.Column>

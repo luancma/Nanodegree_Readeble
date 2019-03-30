@@ -5,7 +5,8 @@ import {
   voteDownPost,
   getPostsById,
   deletePost,
-  getCategoryDefined
+  getCategoryDefined,
+  editPost
 } from "../../utils/apiTeste";
 export const FETCH_POSTS = "FETCH_POSTS";
 export const FETCH_POST_BY_CATEGORY = "FETCH_POST_BY_CATEGORY";
@@ -14,6 +15,7 @@ export const ACTION_ADD_POST = "ACTION_ADD_POST";
 export const ADD_VOTE_POST = "ADD_VOTE_POST";
 export const REMOVE_VOTE_POST = "REMOVE_VOTE_POST";
 export const DELETE_POST = "DELETE_POST";
+export const EDIT_POST = "EDIT_POST";
 
 export function fetchAllPostsSuccess(posts) {
   return {
@@ -60,6 +62,13 @@ export function remoteVotePost(post) {
 export function addPostSuccess(post) {
   return {
     type: ACTION_ADD_POST,
+    post
+  };
+}
+
+export function editPostSuccess(post) {
+  return {
+    type: EDIT_POST,
     post
   };
 }
@@ -153,6 +162,18 @@ export const actionFetchPostsByCategory = category => {
       .then(response => {
         dispatch(fetchPostByCategorySuccess(response.data));
         console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+};
+
+export const actionEditPost = (id, title, body) => {
+  return dispatch => {
+    return editPost(id, title, body)
+      .then(response => {
+        dispatch(editPostSuccess(response.data));
       })
       .catch(error => {
         console.log(error);
