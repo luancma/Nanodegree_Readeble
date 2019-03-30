@@ -81,7 +81,7 @@ class Details extends React.Component {
                                 >
                                   <Icon name="thumbs down outline" />
                                 </Button>
-                                <Link to={`/Edit/${item.id}`}>
+                                <Link to={`/${item.category}/${item.id}/edit`}>
                                   <Button inverted color="purple" circular icon>
                                     <Icon name="edit outline" />
                                   </Button>

@@ -19,9 +19,8 @@ class EditPost extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.match.params.id);
     this.props
-      .dispatch(actionFetchPostById(this.props.match.params.id))
+      .dispatch(actionFetchPostById(this.props.match.params.post_id))
       .then(item =>
         this.setState({
           id: this.props.post.id,

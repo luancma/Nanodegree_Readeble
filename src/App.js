@@ -23,7 +23,7 @@ const App = () => {
           <Route exact path="/newPost/:category" component={NewPostCategory} />
           <Route exact path="/:category/:post_id" component={Details} />
           <Route exact path="/:category" component={CategoryDetails} />
-          <Route exact path="/Edit/:id" component={EditPost} />
+          <Route exact path="/:category/:post_id/edit" component={EditPost} />
           <Route component={NotFound} />
         </Switch>
       </Container>
