@@ -21,15 +21,17 @@ class EditPost extends Component {
   componentDidMount() {
     this.props
       .dispatch(actionFetchPostById(this.props.match.params.post_id))
-      .then(item =>
-        this.setState({
-          id: this.props.post.id,
-          title: this.props.post.title,
-          body: this.props.post.body,
-          author: this.props.post.author,
-          category: this.props.post.category
-        })
-      );
+      .then(data => {
+        Object.values(this.props.post).map(item =>
+          this.setState({
+            id: item.id,
+            title: item.title,
+            body: item.body,
+            author: item.author,
+            category: this.props.match.params.category
+          })
+        );
+      });
   }
 
   handleInputChange = e => {
@@ -46,6 +48,8 @@ class EditPost extends Component {
   };
 
   render() {
+    console.log(this.state);
+
     return (
       <div>
         {this.state.toHomePage === false ? (
@@ -55,7 +59,7 @@ class EditPost extends Component {
                 <div className="form-group">
                   <Form.Field>
                     <label>Category</label>
-                    <input disabled value={this.props.post.category} />
+                    <input disabled value={this.state.category} />
                   </Form.Field>
                 </div>
                 <Form.Field>

@@ -11,6 +11,7 @@ import {
 export const FETCH_POSTS = "FETCH_POSTS";
 export const FETCH_POST_BY_CATEGORY = "FETCH_POST_BY_CATEGORY";
 export const FETCH_POST_ID = "FETCH_POST_ID";
+export const FETCH_POST_ID_FAIL = "FETCH_POST_ID_FAIL";
 export const ACTION_ADD_POST = "ACTION_ADD_POST";
 export const ADD_VOTE_POST = "ADD_VOTE_POST";
 export const REMOVE_VOTE_POST = "REMOVE_VOTE_POST";
@@ -34,6 +35,13 @@ export function fetchPostByCategorySuccess(post) {
 export function fetchPostIdSuccess(post) {
   return {
     type: FETCH_POST_ID,
+    post
+  };
+}
+
+export function fetchPostIdFail(post) {
+  return {
+    type: FETCH_POST_ID_FAIL,
     post
   };
 }

@@ -4,6 +4,7 @@ import {
   ADD_VOTE_POST,
   REMOVE_VOTE_POST,
   FETCH_POST_ID,
+  FETCH_POST_ID_FAIL,
   DELETE_POST,
   FETCH_POST_BY_CATEGORY,
   EDIT_POST
@@ -30,8 +31,8 @@ const posts = (state = [], action) => {
       return [...state.concat(action.post)];
     case ADD_VOTE_POST:
       return [
-        ...state.map(item => {
-          return item.id === action.post.id ? action.post : item;
+        ...[action.post].map(item => {
+          return item.length !== 0 ? action.post.voteScore : item;
         })
       ];
     case REMOVE_VOTE_POST:

@@ -24,6 +24,7 @@ const App = () => {
           <Route exact path="/:category/:post_id" component={Details} />
           <Route exact path="/:category" component={CategoryDetails} />
           <Route exact path="/:category/:post_id/edit" component={EditPost} />
+          <Route exact path="page/noteFound" component={NotFound} />
           <Route component={NotFound} />
         </Switch>
       </Container>

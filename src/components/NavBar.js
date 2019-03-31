@@ -26,7 +26,7 @@ class Nav extends React.Component {
             <Dropdown item text="Category">
               <Dropdown.Menu>
                 {this.props.categories.map(item => (
-                  <NavLink to={`/${item.path}`}>
+                  <NavLink key={item.path} to={`/${item.path}`}>
                     <Dropdown.Item style={{ color: "black" }}>
                       {item.path}
                     </Dropdown.Item>
