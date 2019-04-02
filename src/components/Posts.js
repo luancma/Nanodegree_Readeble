@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { Container, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
 import Post from "./Post";
-import { fetchAllPosts } from "../store/actions/posts";
+import {
+  fetchAllPosts,
+  actionVoteUpPost,
+  fetchPostIdSuccess
+} from "../store/actions/posts";
 
 class Posts extends Component {
   state = {
@@ -13,7 +17,14 @@ class Posts extends Component {
     this.props.dispatch(fetchAllPosts());
   }
 
+  voteUpPost = id => {
+    console.log(id);
+    this.props.dispatch(actionVoteUpPost(id));
+  };
+
   render() {
+    console.log(this.props.post);
+
     this.state.orderByScore
       ? this.props.posts.sort(function(a, b) {
           return b.voteScore - a.voteScore;
@@ -67,7 +78,8 @@ class Posts extends Component {
 }
 const mapStateToProps = state => {
   return {
-    posts: state.posts
+    posts: state.posts,
+    post: state.post
   };
 };
 

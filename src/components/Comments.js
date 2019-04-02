@@ -16,25 +16,25 @@ class Comments extends Component {
     this.props.dispatch(fetchCommentById(this.props.postId));
   }
 
-  voteDownComment = id => {
-    this.props.dispatch(voteDownById(id));
-  };
+  // voteDownComment = id => {
+  //   this.props.dispatch(voteDownById(id));
+  // };
 
-  voteUpComment = id => {
-    console.log(id);
-    this.props.dispatch(voteUpById(id));
-  };
+  // voteUpComment = id => {
+  //   console.log(id);
+  //   this.props.dispatch(voteUpById(id));
+  // };
 
-  // DELETE COMMET:
-  deleteComment = id => {
-    this.props.dispatch(deleteCommentAction(id));
-  };
+  // // DELETE COMMET:
+  // deleteComment = id => {
+  //   this.props.dispatch(deleteCommentAction(id));
+  // };
 
   render() {
     return (
       <div>
         {this.props.comments.map(item => (
-          <CommentDetails commentDetails={item} />
+          <CommentDetails commentDetails={item} key={item.id} />
         ))}
         <NewComment postId={this.props.postId} />
       </div>
