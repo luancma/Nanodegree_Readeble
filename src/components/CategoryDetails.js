@@ -9,6 +9,14 @@ class CategoryDetails extends Component {
     orderByScore: false
   };
 
+  componentDidMount() {
+    this.props
+      .dispatch(actionFetchPostsByCategory(this.props.match.params.category))
+      .then(data => {
+        console.log(this.props.details);
+      });
+  }
+
   render() {
     this.state.orderByScore
       ? this.props.details.sort(function(a, b) {
@@ -52,12 +60,6 @@ class CategoryDetails extends Component {
                 </Button>
               )}
             </Button.Group>
-            {this.props.details.map(
-              post =>
-                post.category === this.props.match.params.category && (
-                  <Post postDetails={post} key={post.id} />
-                )
-            )}
           </div>
         ) : (
           <Container>

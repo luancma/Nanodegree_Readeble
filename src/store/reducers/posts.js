@@ -30,10 +30,11 @@ const posts = (state = [], action) => {
       return [...state.concat(action.post)];
     case ADD_VOTE_POST:
       return [
-        ...[action.post].map(item => {
-          return item.length !== 0 ? action.post.voteScore : item;
+        ...state.map(item => {
+          return item.id === action.post.id ? action.post : item;
         })
       ];
+
     case REMOVE_VOTE_POST:
       return [
         ...state.map(item => {

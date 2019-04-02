@@ -23,8 +23,6 @@ class Posts extends Component {
   };
 
   render() {
-    console.log(this.props.post);
-
     this.state.orderByScore
       ? this.props.posts.sort(function(a, b) {
           return b.voteScore - a.voteScore;
@@ -32,6 +30,7 @@ class Posts extends Component {
       : this.props.posts.sort(function(a, b) {
           return b.timestamp - a.timestamp;
         });
+
     return (
       <div>
         {this.props.posts.length !== 0 ? (
@@ -78,8 +77,7 @@ class Posts extends Component {
 }
 const mapStateToProps = state => {
   return {
-    posts: state.posts,
-    post: state.post
+    posts: state.posts
   };
 };
 
