@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { actionFetchPostsByCategory } from "../store/actions/posts";
 import { Container, Button } from "semantic-ui-react";
 import Post from "./Post";
 import { Link } from "react-router-dom";
@@ -8,14 +7,6 @@ class CategoryDetails extends Component {
   state = {
     orderByScore: false
   };
-
-  componentDidMount() {
-    this.props
-      .dispatch(actionFetchPostsByCategory(this.props.match.params.category))
-      .then(data => {
-        console.log(this.props.details);
-      });
-  }
 
   render() {
     this.state.orderByScore
@@ -60,10 +51,19 @@ class CategoryDetails extends Component {
                 </Button>
               )}
             </Button.Group>
+            {this.props.details.map(
+              post =>
+                post.category === this.props.match.params.category && (
+                  <Post postDetails={post} key={post.id} />
+                )
+            )}
           </div>
         ) : (
           <Container>
             <h1>No posts found</h1>
+            <Link to={`/newPost/${this.props.match.params.category}`}>
+              <Button attached="top">Create Post</Button>
+            </Link>
           </Container>
         )}
       </div>

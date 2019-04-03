@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Grid } from "semantic-ui-react";
-
-import {
-  fetchCommentById,
-  voteDownById,
-  voteUpById,
-  deleteCommentAction
-} from "../store/actions/comments";
+import { fetchCommentById } from "../store/actions/comments";
 import NewComment from "./NewComment";
 import CommentDetails from "./CommentDetails";
 

@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 import Posts from "./components/Posts";
 import NewPost from "./components/NewPost";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import NotFound from "./components/NotFound";
 import Details from "./components/Details";
 import { Container } from "semantic-ui-react";

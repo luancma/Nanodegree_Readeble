@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { actionGetAllCategories } from "../store/actions/categories";
 import { Dropdown, Menu, Segment } from "semantic-ui-react";

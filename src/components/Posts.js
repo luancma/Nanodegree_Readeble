@@ -2,12 +2,8 @@ import React, { Component } from "react";
 import { Container, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
 import Post from "./Post";
-import {
-  fetchAllPosts,
-  actionVoteUpPost,
-  fetchPostIdSuccess
-} from "../store/actions/posts";
-
+import { fetchAllPosts, actionVoteUpPost } from "../store/actions/posts";
+import { Link } from "react-router-dom";
 class Posts extends Component {
   state = {
     orderByScore: false
@@ -69,6 +65,9 @@ class Posts extends Component {
         ) : (
           <Container>
             <h1>No posts found</h1>
+            <Link to={`/newPost`}>
+              <Button attached="top">Create Post</Button>
+            </Link>
           </Container>
         )}
       </div>

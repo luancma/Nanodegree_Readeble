@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import { Form, TextArea, FormField, Button, Card } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import {
-  actionFetchPostById,
-  fetchAllPosts,
-  actionEditPost
-} from "../store/actions/posts";
+import { actionFetchPostById, actionEditPost } from "../store/actions/posts";
 
 class EditPost extends Component {
   state = {

@@ -63,15 +63,28 @@ class Details extends React.Component {
                     <Item.Group>
                       <Item>
                         <Item.Content>
-                          <Item.Header as="a">{item.author}</Item.Header>
+                          <Item.Header as="a">
+                            <h1>{item.title}</h1>
+                          </Item.Header>
                           <Item.Description>
-                            <p>{item.body}</p>
-                            {item.voteScore}
+                            <h3>{item.body}</h3>
                           </Item.Description>
+                          <Item.Description>{item.author}</Item.Description>
+                          <Item.Extra>
+                            Number of comments: {item.commentCount}
+                          </Item.Extra>
+                          <Item.Extra>
+                            {item.voteScore < 0 ? (
+                              <Icon color="red" name="check" />
+                            ) : (
+                              <Icon color="green" name="check" />
+                            )}
+                            {item.voteScore}
+                          </Item.Extra>
                           <Item.Extra>
                             <Button
                               inverted
-                              color="blue"
+                              color="green"
                               circular
                               icon
                               onClick={() => this.votePostUp(item.id)}
@@ -80,7 +93,7 @@ class Details extends React.Component {
                             </Button>
                             <Button
                               inverted
-                              color="blue"
+                              color="green"
                               circular
                               icon
                               onClick={() => this.votePostDown(item.id)}
@@ -88,7 +101,7 @@ class Details extends React.Component {
                               <Icon name="thumbs down outline" />
                             </Button>
                             <Link to={`/${item.category}/${item.id}/edit`}>
-                              <Button inverted color="purple" circular icon>
+                              <Button inverted color="blue" circular icon>
                                 <Icon name="edit outline" />
                               </Button>
                             </Link>

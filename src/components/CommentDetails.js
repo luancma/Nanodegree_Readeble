@@ -5,7 +5,7 @@ import { deleteCommentAction } from "../store/actions/comments";
 import { Comment, Icon } from "semantic-ui-react";
 
 class CommentDetails extends Component {
-  // DELETE COMMET:
+  componentDidMount() {}
   deleteComment = id => {
     this.props.dispatch(deleteCommentAction(id));
   };
