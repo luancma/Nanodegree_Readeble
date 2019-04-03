@@ -9,7 +9,7 @@ Meu segundo projeto do React Nanodegree da Udacity, o projeto corresponde ao mó
 -Redux thunk
 -Axios
 
-__ This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). __
+__This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).__
 
 ## Issues:
 
