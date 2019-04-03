@@ -4,10 +4,10 @@ Meu segundo projeto do React Nanodegree da Udacity, o projeto corresponde ao mó
 
 ## Tecnologias utilizadas:
 
--ReactJS
--Redux
--Redux thunk
--Axios
+- ReactJS
+- Redux
+- Redux thunk
+- Axios
 
 __This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).__
 
